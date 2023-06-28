@@ -381,8 +381,8 @@ static void check_variables(bool init)
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value != NULL)
    {
       // value is a string like "2:1" that we pick apart
-      screen_layout_data.hybrid_ratio_large = std::stoi(*var.value[0]);
-      screen_layout_data.hybrid_ratio_small = std::stoi(*var.value[2]);
+      screen_layout_data.hybrid_ratio_large = var.value[0] - '0';
+      screen_layout_data.hybrid_ratio_small = var.value[2] - '0';
    }
 #else
    screen_layout_data.hybrid_ratio_large = 2;
