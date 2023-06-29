@@ -55,7 +55,7 @@ void copy_hybrid_screen(ScreenLayoutData *data, uint32_t* src, ScreenId screen_i
       {
          memcpy((uint16_t *)data->buffer_ptr
             // X
-            + ((data->screen_width * data->hybrid_ratio * 2) + ((data->hybrid_ratio / 2) * 4))
+            + (int)((data->screen_width * data->hybrid_ratio * 2) + ((data->hybrid_ratio / 2) * 4))
             // Y
             + (y * data->buffer_stride / 2),
             src + (y * data->screen_width), (data->screen_width) * data->pixel_size);
@@ -68,9 +68,9 @@ void copy_hybrid_screen(ScreenLayoutData *data, uint32_t* src, ScreenId screen_i
       {
          memcpy((uint16_t *)data->buffer_ptr
             // X
-            + ((data->screen_width * data->hybrid_ratio * 2) + ((data->hybrid_ratio / 2) * 4))
+            + (int)((data->screen_width * data->hybrid_ratio * 2) + ((data->hybrid_ratio / 2) * 4))
             // Y
-            + ((y + (data->screen_height * (data->hybrid_ratio - 1))) * data->buffer_stride / 2),
+            + (int)((y + (data->screen_height * (data->hybrid_ratio - 1))) * data->buffer_stride / 2),
             src + (y * data->screen_width), (data->screen_width) * data->pixel_size);
       }
    }
@@ -80,7 +80,7 @@ void draw_cursor(ScreenLayoutData *data, int32_t x, int32_t y)
 {
    uint32_t* base_offset = (uint32_t*)data->buffer_ptr;
 
-   uint32_t scale = data->displayed_layout == ScreenLayout::HybridBottom ? data->hybrid_ratio : 1;
+   double scale = data->displayed_layout == ScreenLayout::HybridBottom ? data->hybrid_ratio : 1.0;
 
    uint32_t start_y = Clamp(y - CURSOR_SIZE, 0, data->screen_height) * scale;
    uint32_t end_y = Clamp(y + CURSOR_SIZE, 0, data->screen_height) * scale;
