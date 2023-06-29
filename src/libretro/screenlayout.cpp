@@ -9,7 +9,7 @@ ScreenLayoutData screen_layout_data;
 void initialize_screnlayout_data(ScreenLayoutData *data)
 {
     data->buffer_ptr = nullptr;
-    data->hybrid_ratio = 2;
+    data->hybrid_ratio = 2.0;
 }
 
 void update_screenlayout(ScreenLayout layout, ScreenLayoutData *data, bool opengl, bool swap_screens)

@@ -503,15 +503,17 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "melonds_hybrid_ratio",
       "Hybrid Ratio (OpenGL Only)",
       NULL,
-      NULL,
+      "Choose the ratio X:1 of the size of the large:small screens when using 'hybrid' mode",
       NULL,
       "screen",
       {
-         { "2", NULL },
-         { "3", NULL },
+         { "1.5", NULL },
+         { "2.0", NULL },
+         { "3.0", NULL },
+         { "4.0", NULL },
          { NULL, NULL },
       },
-      "2"
+      "2.0"
    },
 #endif
 #ifdef JIT_ENABLED
