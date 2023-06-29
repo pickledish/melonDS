@@ -80,7 +80,12 @@ void draw_cursor(ScreenLayoutData *data, int32_t x, int32_t y)
 {
    uint32_t* base_offset = (uint32_t*)data->buffer_ptr;
 
-   uint32_t scale = data->displayed_layout == ScreenLayout::HybridBottom ? data->hybrid_ratio_large : 1;
+   uint32_t scale = 1;
+   if (data->displayed_layout == ScreenLayout::HybridBottom) {
+      scale = screen_layout_data.hybrid_ratio_large;
+   } else if (data->displayed_layout == ScreenLayout::HybridTop) {
+      scale = screen_layout_data.hybrid_ratio_small;
+   }
 
    uint32_t start_y = Clamp(y - CURSOR_SIZE, 0, data->screen_height) * scale;
    uint32_t end_y = Clamp(y + CURSOR_SIZE, 0, data->screen_height) * scale;
