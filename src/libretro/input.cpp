@@ -83,7 +83,12 @@ void update_input(InputState *state)
                int16_t pointer_x = input_state_cb(0, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_X);
                int16_t pointer_y = input_state_cb(0, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_Y);
 
-               unsigned int touch_scale = screen_layout_data.displayed_layout == ScreenLayout::HybridBottom ? screen_layout_data.hybrid_ratio_large : 1;
+               unsigned int touch_scale = 1;
+               if (screen_layout_data.displayed_layout == ScreenLayout::HybridBottom) {
+                  touch_scale = screen_layout_data.hybrid_ratio_large;
+               } else if (screen_layout_data.displayed_layout == ScreenLayout::HybridTop) {
+                  touch_scale = screen_layout_data.hybrid_ratio_small;
+               }
 
                unsigned int x = ((int)pointer_x + 0x8000) * screen_layout_data.buffer_width / 0x10000 / touch_scale;
                unsigned int y = ((int)pointer_y + 0x8000) * screen_layout_data.buffer_height / 0x10000 / touch_scale;

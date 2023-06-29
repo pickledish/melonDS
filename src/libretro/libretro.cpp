@@ -380,7 +380,7 @@ static void check_variables(bool init)
    var.key = "melonds_hybrid_ratio";
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value != NULL)
    {
-      // value is a string like "2:1" that we pick apart
+      // value is a string like "2:1", cut it apart and convert to number
       screen_layout_data.hybrid_ratio_large = var.value[0] - '0';
       screen_layout_data.hybrid_ratio_small = var.value[2] - '0';
    }
